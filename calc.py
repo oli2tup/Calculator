@@ -20,25 +20,37 @@ top_frame.grid(row = 0, column = 0)
 frm = ttk.Frame(window, padding = 5)
 frm. grid(row = 1, column = 0)
 
-# Text Field
+# Variable which will be displayed in our text field
+equation = StringVar()
 
-field = Text(top_frame, height = 2, width = 30)
+# Text Field
+field = Entry(top_frame, textvariable = equation)
 field.grid(column = 0, row = 0)
+
+# global expression
+expression = ""
+
 
 #---------------------------------------------------------------------------------------#
 # button functionality 
 def clicked(num):
     '''action for when the button is clicked'''
 
-    field.insert(INSERT, 0)
+    global expression
+
+
+    equation.set(num)
+
+    expression = ""
+
 
 #---------------------------------------------------------------------------------------#
 # keeping all the buttons in on array in the format i want them to appear
 buttons = [["Quit", "( )", "%", "÷"],
-           [7, 8, 9, "x"],
-           [4, 5, 6, "-"],
-           [1, 2, 3, "+"],
-           [0, ".", "⌫", "="]]
+           ['7', '8', '9', "x"],
+           ['4', '5', '6', "-"],
+           ['1', '2', '3', "+"],
+           ['0', ".", "⌫", "="]]
 
 
 for row in range (0, 5):        # staring the button at row 4 ending row 7
@@ -46,7 +58,7 @@ for row in range (0, 5):        # staring the button at row 4 ending row 7
 
         button_text = buttons[row][column]
         button = ttk.Button(frm, text = button_text, 
-                            command = clicked(button_text), textvariable= button_text)
+                            command = clicked(button_text))
         button.grid(column = column , row = row + 4)
         #print(button_text)
 
